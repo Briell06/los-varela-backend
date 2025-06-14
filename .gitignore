@@ -94,6 +94,8 @@ venv/
 ENV/
 env.bak/
 pyvenv.cfg
+migrations
+
 
 # Spyder project settings
 .pydevproject
