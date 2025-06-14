@@ -9,6 +9,9 @@ class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to="category_images/")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True, verbose_name="Activo")
 
     def __str__(self):
         return self.title
@@ -22,6 +25,14 @@ class Product(models.Model):
     title = models.CharField(max_length=100, verbose_name="Nombre del producto")
     slug = models.SlugField(max_length=100, unique=True, verbose_name="Slug")
     description = models.TextField(verbose_name="Descripción del producto")
+    fake_price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        verbose_name="Precio falso",
+        null=True,
+        blank=True,
+        help_text="No es necesario pasarle un precio falso",
+    )
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Precio")
     image = models.ImageField(
         upload_to="product_images/", verbose_name="Imagen del producto"
@@ -30,7 +41,11 @@ class Product(models.Model):
         Category,
         on_delete=models.CASCADE,
         verbose_name="Categoría",
+        related_name="products",
     )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True, verbose_name="Activo")
 
     def __str__(self):
         return self.title

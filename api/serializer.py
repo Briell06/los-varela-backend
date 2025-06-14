@@ -17,6 +17,8 @@ class ProductSerializer(serializers.ModelSerializer):
             "image",
             "slug",
             "description",
+            "created_at",
+            "updated_at",
         )
 
 
@@ -27,4 +29,6 @@ class CategorySerializer(serializers.ModelSerializer):
             "id",
             "title",
             "image",
+            "created_at",
+            "updated_at",
         )
